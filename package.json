@@ -1,0 +1,62 @@
+{
+  "name": "What 3 Words",
+  "author": "Javier Rizzo-Aguirre",
+  "version": "1.0.0",
+  "keywords": [
+    "what-3-words",
+    "location",
+    "lines",
+    "colorful"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "What 3 Words",
+    "uuid": "9687d847-44bf-4a16-ab28-6d9fe95284b8",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "diorite"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "Word1",
+      "Word2",
+      "Word3"
+    ],
+    "resources": {
+      "media": [
+        {
+          "type": "font",
+          "name": "FONT_HELVETICA_20",
+          "file": "fonts/helvetica.ttf",
+          "compatibility": "2.7"
+        },
+        {
+          "type": "font",
+          "name": "FONT_HELVETICA_25",
+          "file": "fonts/helvetica.ttf",
+          "compatibility": "2.7"
+        },
+        {
+          "type": "bitmap",
+          "name": "BG",
+          "file": "images/bg.png"
+        },
+        {
+          "menuIcon": true,
+          "type": "png",
+          "name": "IMAGE_MENU_ICON",
+          "file": "images/icon.png"
+        }
+      ]
+    },
+    "capabilities": [
+      "location"
+    ]
+  }
+}

@@ -29,6 +29,9 @@ var dict = {
   'Word3': '...'
 }
 
+var lat = null;
+var lon = null;
+
 function sendLocation() {
   navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 }
@@ -39,25 +42,34 @@ Pebble.addEventListener('ready', function() {
 });
 
 function geoSuccess(pos) {
-  var req = new XMLHttpRequest();
-  req.onreadystatechange = function() {
-    if(this.readyState == 4 && this.status == 200) {
-      var res = JSON.parse(req.responseText);
-      var words = res.words.split('.');
-      dict.Word1 = words[0];
-      dict.Word2 = words[1];
-      dict.Word3 = words[2];
-      Pebble.sendAppMessage(dict, function() {
-      }, function(e) {
-      });
-    }
-  };
-  req.open(
-    'GET',
-    'https://api.what3words.com/v3/convert-to-3wa?coordinates='
-    + pos.coords.latitude + ',' + pos.coords.longitude + '&key=' + W3W_KEY,
-    true);
-  req.send();
+  if(lat != pos.coords.latitude || lon != pos.coords.longitude) {
+    var lat = pos.coords.latitude;
+    var lon = pos.coords.longitude;
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+      if(this.readyState == 4 && this.status == 200) {
+        var res = JSON.parse(req.responseText);
+        var words = res.words.split('.');
+        if(dict.Word1 != words[0]
+          || dict.Word2 != words[1]
+          || dict.Word3 != words[2]) {
+          dict.Word1 = words[0];
+          dict.Word2 = words[1];
+          dict.Word3 = words[2];
+          Pebble.sendAppMessage(dict, function() {
+          }, function(e) {
+          });
+        }
+      }
+    };
+    req.open(
+      'GET',
+      'https://api.what3words.com/v3/convert-to-3wa?coordinates='
+      + lat + ',' + lon + '&key=' + W3W_KEY,
+      true);
+    req.send();
+  }
+
 }
 
 function geoError(err) {

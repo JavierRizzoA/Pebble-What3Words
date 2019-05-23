@@ -5,6 +5,8 @@ A watchface for Pebble Smartwatch that displays your location according to
 
 Compatible with every rectangular Pebble.
 
+![Screenshot](screenshot.png)
+
 ## Installing
 
 [Download the .pbw file](https://github.com/JavierRizzoA/Pebble-What3Words/releases)

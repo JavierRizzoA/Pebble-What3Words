@@ -1,7 +1,7 @@
 {
   "name": "What 3 Words",
   "author": "Javier Rizzo-Aguirre",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "keywords": [
     "what-3-words",
     "location",
@@ -9,7 +9,9 @@
     "colorful"
   ],
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "pebble-clay": "^1.0.4"
+  },
   "pebble": {
     "displayName": "What 3 Words",
     "uuid": "9687d847-44bf-4a16-ab28-6d9fe95284b8",
@@ -26,7 +28,11 @@
     "messageKeys": [
       "Word1",
       "Word2",
-      "Word3"
+      "Word3",
+      "ShowWeather",
+      "WeatherKey",
+      "Unit",
+      "Weather"
     ],
     "resources": {
       "media": [
@@ -39,6 +45,12 @@
         {
           "type": "font",
           "name": "FONT_HELVETICA_25",
+          "file": "fonts/helvetica.ttf",
+          "compatibility": "2.7"
+        },
+        {
+          "type": "font",
+          "name": "FONT_HELVETICA_15",
           "file": "fonts/helvetica.ttf",
           "compatibility": "2.7"
         },
@@ -56,7 +68,8 @@
       ]
     },
     "capabilities": [
-      "location"
+      "location",
+      "configurable"
     ]
   }
 }

@@ -23,10 +23,12 @@ static TextLayer *word2_layer;
 static TextLayer *word3_layer;
 static GFont location_font;
 static GFont time_font;
+static GFont weather_font;
 static BitmapLayer *background_layer;
 static GBitmap *background_bitmap;
 static TextLayer *time_layer;
 static TextLayer *date_layer;
+static TextLayer *weather_layer;
 
 static void update_time() {
   time_t temp = time(NULL);
@@ -51,6 +53,7 @@ static void inbox_received_callback(DictionaryIterator *iter, void *context) {
   Tuple *word1_tuple = dict_find(iter, MESSAGE_KEY_Word1);
   Tuple *word2_tuple = dict_find(iter, MESSAGE_KEY_Word2);
   Tuple *word3_tuple = dict_find(iter, MESSAGE_KEY_Word3);
+  Tuple *weather_tuple = dict_find(iter, MESSAGE_KEY_Weather);
   if(word1_tuple && word2_tuple && word3_tuple) {
     char *word1 = word1_tuple->value->cstring;
     char *word2 = word2_tuple->value->cstring;
@@ -58,6 +61,10 @@ static void inbox_received_callback(DictionaryIterator *iter, void *context) {
     text_layer_set_text(word1_layer, word1);
     text_layer_set_text(word2_layer, word2);
     text_layer_set_text(word3_layer, word3);
+  }
+  if(weather_tuple) {
+    char *weather = weather_tuple->value->cstring;
+    text_layer_set_text(weather_layer, weather);
   }
 }
 
@@ -75,27 +82,35 @@ static void window_load(Window *window) {
 
   location_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_HELVETICA_20));
   time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_HELVETICA_25));
+  weather_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_HELVETICA_15));
   word1_layer = text_layer_create(GRect(44, 75, bounds.size.w - 44, 30));
   word2_layer = text_layer_create(GRect(44, 95, bounds.size.w - 44, 30));
   word3_layer = text_layer_create(GRect(44, 115, bounds.size.w - 44, 30));
+  weather_layer = text_layer_create(GRect(44, 145, bounds.size.w - 44, 30));
   text_layer_set_font(word1_layer, location_font);
   text_layer_set_font(word2_layer, location_font);
   text_layer_set_font(word3_layer, location_font);
+  text_layer_set_font(weather_layer, weather_font);
   text_layer_set_text(word1_layer, "...");
   text_layer_set_text(word2_layer, "...");
   text_layer_set_text(word3_layer, "...");
+  text_layer_set_text(weather_layer, "");
   text_layer_set_text_alignment(word1_layer, GTextAlignmentCenter);
   text_layer_set_text_alignment(word2_layer, GTextAlignmentCenter);
   text_layer_set_text_alignment(word3_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(weather_layer, GTextAlignmentCenter);
   text_layer_set_background_color(word1_layer, GColorClear);
   text_layer_set_background_color(word2_layer, GColorClear);
   text_layer_set_background_color(word3_layer, GColorClear);
+  text_layer_set_background_color(weather_layer, GColorClear);
   text_layer_set_text_color(word1_layer, GColorSpringBud);
   text_layer_set_text_color(word2_layer, GColorVividCerulean);
   text_layer_set_text_color(word3_layer, GColorYellow);
+  text_layer_set_text_color(weather_layer, GColorWhite);
   layer_add_child(window_layer, text_layer_get_layer(word1_layer));
   layer_add_child(window_layer, text_layer_get_layer(word2_layer));
   layer_add_child(window_layer, text_layer_get_layer(word3_layer));
+  layer_add_child(window_layer, text_layer_get_layer(weather_layer));
 
   time_layer = text_layer_create(GRect(44, 35, bounds.size.w - 44, 32));
   date_layer = text_layer_create(GRect(44, 1, bounds.size.w - 44, 32));
@@ -115,7 +130,9 @@ static void window_unload(Window *window) {
   text_layer_destroy(word1_layer);
   text_layer_destroy(word2_layer);
   text_layer_destroy(word3_layer);
+  text_layer_destroy(weather_layer);
   fonts_unload_custom_font(location_font);
+  fonts_unload_custom_font(weather_font);
   fonts_unload_custom_font(time_font);
   gbitmap_destroy(background_bitmap);
   bitmap_layer_destroy(background_layer);

@@ -14,6 +14,12 @@ in your phone and open it with the Pebble App.
 
 It will be uploaded to the Rebble Appstore as soon as there's a way to do so.
 
+## Configuration
+
+The watchface is capable of displaying the current weather and temperature. This
+option is off by default and in order to use it, it is necessary to supply an
+[OpenWeatherMap API Key](https://openweathermap.org/api) in the settings.
+
 ## Building & Installing from Source
 
 Edit the line `var W3W_KEY = '';` on `src/pkjs/index.js` so that it contains

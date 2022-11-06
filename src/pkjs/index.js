@@ -35,6 +35,7 @@ var dict = {
 
 var lat = null;
 var lon = null;
+var showWeather = true;
 
 var Clay = require('pebble-clay');
 var clayConfig = require('./config');
@@ -61,6 +62,10 @@ Pebble.addEventListener('webviewclosed', function(e) {
     settings = JSON.parse(decodeURIComponent(e.response));
     localStorage.setItem('settings', decodeURIComponent(e.response));
     lastWeatherUpdate = (new Date).getTime() - WEATHER_FREQ
+    if (showWeather && !settings.ShowWeather.value) {
+      clearWeather();
+    }
+    showWeather = settings.ShowWeather.value;
     updateLocation();
   }
 });
@@ -134,4 +139,9 @@ function getWeather() {
       weatherReq.send();
     }
   }
+}
+
+function clearWeather() {
+  dict.Weather = '';
+  Pebble.sendAppMessage(dict, function() {}, function(e) {});
 }

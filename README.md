@@ -5,14 +5,15 @@ A watchface for Pebble Smartwatch that displays your location according to
 
 Compatible with every rectangular Pebble.
 
-![Screenshot](screenshot.png)
+
+![Screenshot](store_resources/screenshot_color1.png)
 
 ## Installing
 
-[Download the .pbw file](https://github.com/JavierRizzoA/Pebble-What3Words/releases)
-in your phone and open it with the Pebble App.
+[Get it from the Rebble Store](https://apps.rebble.io/en_US/application/63671421c6c24a000a815e48).
 
-It will be uploaded to the Rebble Appstore as soon as there's a way to do so.
+Or [Download the .pbw file](https://github.com/JavierRizzoA/Pebble-What3Words/releases)
+in your phone and open it with the Pebble App.
 
 ## Configuration
 
@@ -40,7 +41,7 @@ pebble install --phone [PHONE_IP_ADDRESS]
 
 ## License
 
-Copyright (C) 2019  Javier Rizzo-Aguirre
+Copyright (C) 2022  Javier Rizzo-Aguirre
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

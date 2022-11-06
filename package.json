@@ -1,12 +1,13 @@
 {
-  "name": "What 3 Words",
+  "name": "what-3-words",
   "author": "Javier Rizzo-Aguirre",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "keywords": [
     "what-3-words",
     "location",
     "lines",
-    "colorful"
+    "colorful",
+    "weather"
   ],
   "private": true,
   "dependencies": {
@@ -57,7 +58,19 @@
         {
           "type": "bitmap",
           "name": "BG",
-          "file": "images/bg.png"
+          "file": "images/bg.png",
+          "targetPlatforms": [
+            "basalt"
+          ]
+        },
+        {
+          "type": "bitmap",
+          "name": "BG",
+          "file": "images/bg_bw.png",
+          "targetPlatforms": [
+            "aplite",
+            "diorite"
+          ]
         },
         {
           "menuIcon": true,
